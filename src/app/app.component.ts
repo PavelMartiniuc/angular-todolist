@@ -21,6 +21,10 @@ export class AppComponent {
 
   addItem(newItemName: string) {
     if (newItemName) {
+      if (this.model.items.filter(item => item.action == newItemName).length) {
+        alert('Item wjth this name already exists');
+        return;
+      }
       this.model.items.push(new TodoItem(newItemName, false));
     }
   }
