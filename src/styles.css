@@ -2,3 +2,15 @@
  body {
     padding: 5px;
  }
+
+ #gridContainer {
+   padding: 20px;
+   width: 100%;
+}
+ 
+ .row > div {
+    border: 1px solid lightgrey;
+    padding: 10px;
+    background-color: aliceblue;
+    margin: 5px 0;
+  }
