@@ -64,6 +64,13 @@ module.exports = function () {
         description: "Gold-plated, diamond-studded King",
         price: 1200,
       },
+      {
+        id: 10,
+        name: "Big wight",
+        category: "Ganteli",
+        description: "Хорошие гантели",
+        price: 700,
+      }
     ],
     orders: [],
   };
