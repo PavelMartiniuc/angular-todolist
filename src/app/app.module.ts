@@ -4,8 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { ProductStaticRepository } from './model/repositories/product.static.respositiry';
-import { StaticDataSource } from './dataSource/static.datasource';
+import { StoreModule } from "./store/store.module"; 
 
 @NgModule({
   declarations: [
@@ -14,9 +13,10 @@ import { StaticDataSource } from './dataSource/static.datasource';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule
   ],
-  providers: [StaticDataSource ,ProductStaticRepository],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
