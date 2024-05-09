@@ -10,6 +10,21 @@
 
         <div class="col-9 bg-white pa-1">
             {{Products.length}} Products
+            <div>
+                <select class="form-control" [value]="productsPerPage" (change)="changePageSize($event.target.value)">
+                    <option value="3">3 per Page</option>
+                    <option value="4">4 per Page</option>
+                    <option value="6">6 per Page</option>
+                    <option value="8">8 per Page</option>
+                </select>
+            </div>
+            <div class="btn-group float-right">
+                <button *ngFor="let page of PageNumbers" (click)="changePage(page)" class="btn btn-outline-primary"
+                    [class.active]="page == selectedPage">
+                    {{page}}
+                </button>
+            </div> 
+
         </div>
     </div>
 
@@ -35,5 +50,4 @@
             </div>
         </div>
     </div>
-
 </div>

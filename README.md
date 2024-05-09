@@ -26,7 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
  ## Hints
-
+0. Install anular cli npm install -g @angular/cli
 1. Allow run powershell scripts : Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 2. Run json server
 json-server src/app/dataSource/jsonServerData.js --port 3500 --middlewares src/app/auth/authMiddleware.js
