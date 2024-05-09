@@ -33,3 +33,7 @@ json-server src/app/dataSource/jsonServerData.js --port 3500 --middlewares src/a
 3. Generate environment
    ng g environments
    https://stackoverflow.com/questions/74558182/angular-15-cli-does-not-create-environments-folder-when-creating-an-angular-proj
+
+4. Update git credentials
+git config --global user.name "pavel.martiniuc"
+git config --global user.email "pavel_martin@mail.ru"
