@@ -10,8 +10,8 @@
 
         <div class="col-9 bg-white pa-1">
             {{Products.length}} Products
-            <div>
-                <select class="form-control" [value]="productsPerPage" (change)="changePageSize($event.target.value)">
+            <div class="float-right">
+                <select #itemsPerPageElement class="form-control mr-2" [value]="productsPerPage" (change)="changePageSize(itemsPerPageElement.value)">
                     <option value="3">3 per Page</option>
                     <option value="4">4 per Page</option>
                     <option value="6">6 per Page</option>

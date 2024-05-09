@@ -36,7 +36,7 @@ export class StoreComponent {
         this.selectedPage = newPage;
     }
 
-    public changePageSize(newSize: number | null) {
+    public changePageSize(newSize: number | null | string) {
         this.productsPerPage = Number(newSize);
         this.changePage(1);
     }
