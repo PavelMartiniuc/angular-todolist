@@ -41,10 +41,15 @@ export class StoreComponent {
         this.changePage(1);
     }
 
+    /*
     public get PageNumbers(): number[] {
         return Array(Math.ceil(this.repository
             .getProducts(this.selectedCategory).length / this.productsPerPage))
             .fill(0)
             .map((x, i) => i + 1);
+    }
+    */
+    public get pageCount(): number {
+        return Math.ceil(this.repository.getProducts(this.selectedCategory).length / this.productsPerPage)
     }
 }
