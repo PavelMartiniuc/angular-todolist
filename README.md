@@ -29,7 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 0. Install anular cli npm install -g @angular/cli
 1. Allow run powershell scripts : Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 2. Run json server
-json-server src/app/dataSource/jsonServerData.js --port 3500 --middlewares src/app/auth/authMiddleware.js
+npx json-server --watch src/app/dataSource/jsonServerData.json -m src/app/auth/authMiddleware.js
 3. Generate environment
    ng g environments
    https://stackoverflow.com/questions/74558182/angular-15-cli-does-not-create-environments-folder-when-creating-an-angular-proj
