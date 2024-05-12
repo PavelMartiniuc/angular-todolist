@@ -6,10 +6,13 @@ import { StoreComponent } from "./store.component";
 import { CounterDirective } from "./directives/counter.directive";
 import { CartSummaryComponent } from "./cartSummary.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CartDetailComponent } from "./cartDetail.component";
+import { CheckoutComponent } from "./checkout.component";
+import { RouterModule } from "@angular/router";
  
 @NgModule({
- imports: [ModelModule, BrowserModule, FormsModule, FontAwesomeModule],
- declarations: [StoreComponent, CounterDirective, CartSummaryComponent],
- exports: [StoreComponent]
+ imports: [ModelModule, BrowserModule, FormsModule, FontAwesomeModule, RouterModule],
+ declarations: [StoreComponent, CounterDirective, CartSummaryComponent, CartDetailComponent, CheckoutComponent],
+ exports: [StoreComponent, CartDetailComponent, CheckoutComponent]
 })
 export class StoreModule { }

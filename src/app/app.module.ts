@@ -7,6 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { StoreModule } from "./store/store.module"; 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { StoreComponent } from "./store/store.component";
+import { CheckoutComponent } from "./store/checkout.component";
+import { CartDetailComponent } from "./store/cartDetail.component";
+import { RouterModule } from "@angular/router";
+
 @NgModule({
   declarations: [
     AppComponent
@@ -16,7 +21,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     AppRoutingModule,
     StoreModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterModule.forRoot([
+      { path: "store", component: StoreComponent },
+      { path: "cart", component: CartDetailComponent },
+      { path: "checkout", component: CheckoutComponent },
+      { path: "**", redirectTo: "/store" }
+      ])
   ],
   providers: [],
   bootstrap: [AppComponent]

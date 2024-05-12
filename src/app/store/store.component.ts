@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Product } from '../model/product.model';
 import { ProductStaticRepository } from '../model/repositories/product.static.respositiry';
 import { Cart } from '../model/cart.model';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'store',
@@ -19,7 +19,8 @@ export class StoreComponent {
 
     constructor(
         private repository: ProductStaticRepository,
-        private cart: Cart
+        private cart: Cart,
+        private router: Router
     ) {}
   
     get Products(): Product[] {
@@ -62,6 +63,7 @@ export class StoreComponent {
 
     public addProductToCart(product: Product) {
         this.cart.addLine(product);
+        //this.router.navigateByUrl("/cart");
     }
     /* _ Cart */
 }
