@@ -26,7 +26,8 @@ export class StaticDataSource
             new Product(13, 'Product 13', 'Category 3', 'Product 13 (Category 3)', 400),
             new Product(14, 'Product 14', 'Category 3', 'Product 14 (Category 3)', 500),
             new Product(15, 'Product 15', 'Category 3', 'Product 15 (Category 3)', 700),
-            new Product(16, 'Product 16', 'Гантели', 'Тяжеляк', 400),
+            new Product(16, 'Гантели', 'Тяжеляк', 'Описание гантелей', 400),
+            new Product(17, 'Штанга', 'Тяжеляк', 'Описание штанги', 1800),
     ];
   
     public getProducts(): Observable<Product[]>  
