@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Product } from '../model/product.model';
 import { ProductStaticRepository } from '../model/repositories/product.static.respositiry';
+import { Cart } from '../model/cart.model';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'store',
@@ -15,7 +17,10 @@ export class StoreComponent {
     
     public selectedPage = 1;
 
-    constructor(private repository: ProductStaticRepository) {}
+    constructor(
+        private repository: ProductStaticRepository,
+        private cart: Cart
+    ) {}
   
     get Products(): Product[] {
         let pageIndex = (this.selectedPage - 1) * this.productsPerPage
@@ -52,4 +57,11 @@ export class StoreComponent {
     public get pageCount(): number {
         return Math.ceil(this.repository.getProducts(this.selectedCategory).length / this.productsPerPage)
     }
+
+    /* Cart */
+
+    public addProductToCart(product: Product) {
+        this.cart.addLine(product);
+    }
+    /* _ Cart */
 }

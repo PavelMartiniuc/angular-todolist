@@ -1,5 +1,6 @@
 <div class="bg-primary pl-1 pt-1 pr-1 pb-1 text-xs-center">
     <a class="navbar-brand text-light">SPORTS STORE</a>
+    <cart-summary></cart-summary>
 </div>
 
 <div class="container-fluid">
@@ -38,14 +39,19 @@
             </button>
         </div>
         <div class="col-9 pa-1">
-            <div *ngFor="let product of Products" class="card card-outline-primary">
+            <div *ngFor="let product of Products" class="card card-outline-primary  mt-2">
                 <h5 class="card-header pt-1 pb-1">
                     {{product.name}}
+                    <button class="btn-outline-success btn-sm float-right ml-2" (click)="addProductToCart(product)">
+                        Add To Cart
+                    </button>
                     <span class="badge badge-info float-right">
                         {{ product.price | currency:"USD":true:"2.2-2" }}
                     </span>
+                   
                 </h5>
                 <div class="card-text pl-4">{{product.description}}</div>
+               
             </div>
         </div>
     </div>
