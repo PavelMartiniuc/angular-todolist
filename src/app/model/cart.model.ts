@@ -22,8 +22,16 @@ export class Cart {
         this.recalculate();
     }
 
-    public updateQuantity(product: Product, quantity: number) {
+    public updateQuantity(product: Product, quantity: number | string) {
         
+        quantity = Number(quantity);
+
+        if (quantity == 0)
+        {
+            this.removeLine(product.id);
+            return;
+        }
+
         let line = this.lines.find(line => line.product.id == product.id);
         if (line != undefined) {
             line.quantity = quantity;
