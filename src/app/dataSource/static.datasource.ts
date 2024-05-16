@@ -5,6 +5,8 @@ import { Product } from '../model/product.model';
 
 import { Observable, of } from 'rxjs';
 
+import { Order } from '../model/order.model';
+
 @Injectable()
 export class StaticDataSource
 {
@@ -33,5 +35,10 @@ export class StaticDataSource
     public getProducts(): Observable<Product[]>  
     {
         return of(this.products);
+    }
+
+    public saveOrder(order: Order): Observable<Order> {
+        console.log("Your order: " + JSON.stringify(order));
+        return of(order);
     }
 }

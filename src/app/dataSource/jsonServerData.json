@@ -71,5 +71,42 @@
       "price": 700
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "cart": {
+        "lines": [
+          {
+            "product": {
+              "id": 1,
+              "name": "Kayak",
+              "category": "Watersports",
+              "description": "A boat for one person",
+              "price": 275
+            },
+            "quantity": 1
+          },
+          {
+            "product": {
+              "id": 2,
+              "name": "Lifejacket",
+              "category": "Watersports",
+              "description": "Protective and fashionable",
+              "price": 48.95
+            },
+            "quantity": 1
+          }
+        ],
+        "itemCount": 2,
+        "cartPrice": 323.95
+      },
+      "shipped": false,
+      "name": "hgf",
+      "address": "вап",
+      "city": "апр",
+      "state": "про",
+      "zip": "про",
+      "country": "пропр",
+      "id": 1
+    }
+  ]
 }
