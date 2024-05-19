@@ -1,5 +1,9 @@
 <div class="bg-primary pl-1 pt-1 pr-1 pb-1 text-xs-center">
     <a class="navbar-brand text-light">SPORTS STORE</a>
+    
+    <button class="btn btn-sm bg-inverse float-right ml-2" routerLink="/admin" >
+        <fa-icon [icon]="faGear"></fa-icon>
+    </button>
     <cart-summary></cart-summary>
 </div>
 
@@ -10,7 +14,7 @@
         </div>
 
         <div class="col-9 bg-white pa-1">
-            {{Products.length}} Products
+            {{ProductsPerPage.length}} Products of {{TotalProductsCount}}
             <div class="btn-group float-right">
                 <button  *counter="let page of pageCount" (click)="changePage(page)" class="btn btn-outline-primary"
                     [class.active]="page == selectedPage">
@@ -18,7 +22,7 @@
                 </button>
             </div> 
             <div class="float-right">
-                <select #itemsPerPageElement class="form-control" [value]="productsPerPage" (change)="changePageSize(itemsPerPageElement.value)">
+                <select #itemsPerPageElement class="form-control" [value]="productsPerPageCount" (change)="changePageSize(itemsPerPageElement.value)">
                     <option value="3">3 per Page</option>
                     <option value="4">4 per Page</option>
                     <option value="6">6 per Page</option>
@@ -39,7 +43,7 @@
             </button>
         </div>
         <div class="col-9 pa-1">
-            <div *ngFor="let product of Products" class="card card-outline-primary  mt-2">
+            <div *ngFor="let product of ProductsPerPage" class="card card-outline-primary  mt-2">
                 <h5 class="card-header pt-1 pb-1">
                     {{product.name}}
                     <button class="btn-outline-success btn-sm float-right ml-2" (click)="addProductToCart(product)">

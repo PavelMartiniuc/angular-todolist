@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Product } from '../model/product.model';
-import { ProductStaticRepository } from '../model/repositories/product.static.respositiry';
 import { Cart } from '../model/cart.model';
 import { Router } from "@angular/router";
+import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { ProductRestRepository } from '../model/repositories/product.rest.Repositiry';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'store',
@@ -13,27 +15,59 @@ export class StoreComponent {
   
     public selectedCategory?: string | null = null;
     
-    public productsPerPage = 4;
+    public productsPerPageCount = 4;
     
     public selectedPage = 1;
 
+    public totalProductsCount = 0;
+
+    faGear = faGear
+
+    private productsPerPage: Product[] = null;
+
     constructor(
-        private repository: ProductStaticRepository,
+        private repository: ProductRestRepository,
         private cart: Cart,
-        private router: Router
-    ) {}
+        private router: Router,
+        private authService : AuthService
+    ) {
+
+        if(!authService.authenticated) {
+            this.router.navigateByUrl("/admin")
+        }
+        else {
+            this.productsPerPage = [];
+            this.FillProducts()
+        }
+    }
   
-    get Products(): Product[] {
-        let pageIndex = (this.selectedPage - 1) * this.productsPerPage
+    public get ProductsPerPage(): Product[] {
+        if (!this.productsPerPage) {
+            this.FillProducts();
+        }
+             
+        let pageIndex = (this.selectedPage - 1) * this.productsPerPageCount
         
-        return this.repository.getProducts(this.selectedCategory)
-            .slice(pageIndex, pageIndex + this.productsPerPage);
+        this.productsPerPage = this.repository.getProducts(this.selectedCategory)
+            .slice(pageIndex, pageIndex + this.productsPerPageCount);
+        
+        return this.productsPerPage;
     }
 
-    get Categories(): (string | undefined)[] {
+    public get TotalProductsCount() : number {
+        return this.repository.TotalProductsCount;
+    }
+
+    private FillProducts(): void {
+        
+        this.repository.fillProducts();
+    }
+
+    public get Categories(): (string | undefined)[] {
         return this.repository.getCategories();
     }
 
+    
     public changeCategory(newCategory?: string) {
         this.selectedCategory = newCategory;
     }
@@ -43,7 +77,7 @@ export class StoreComponent {
     }
 
     public changePageSize(newSize: number | null | string) {
-        this.productsPerPage = Number(newSize);
+        this.productsPerPageCount = Number(newSize);
         this.changePage(1);
     }
 
@@ -56,7 +90,7 @@ export class StoreComponent {
     }
     */
     public get pageCount(): number {
-        return Math.ceil(this.repository.getProducts(this.selectedCategory).length / this.productsPerPage)
+        return Math.ceil(this.repository.getProducts(this.selectedCategory).length / this.productsPerPageCount)
     }
 
     /* Cart */

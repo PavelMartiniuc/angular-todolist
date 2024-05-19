@@ -69,6 +69,13 @@
       "category": "Ganteli",
       "description": "Хорошие гантели",
       "price": 700
+    },
+    {
+      "id": 11,
+      "name": "Kayak1",
+      "category": "Watersports",
+      "description": "A boat for one person 2",
+      "price": 400
     }
   ],
   "orders": [
@@ -107,6 +114,52 @@
       "zip": "про",
       "country": "пропр",
       "id": 1
+    },
+    {
+      "cart": {
+        "lines": [
+          {
+            "product": {
+              "id": 1,
+              "name": "Kayak",
+              "category": "Watersports",
+              "description": "A boat for one person",
+              "price": 275
+            },
+            "quantity": 1
+          },
+          {
+            "product": {
+              "id": 3,
+              "name": "Soccer Ball",
+              "category": "Soccer",
+              "description": "FIFA-approved size and weight",
+              "price": 19.5
+            },
+            "quantity": 1
+          },
+          {
+            "product": {
+              "id": 4,
+              "name": "Corner Flags",
+              "category": "Soccer",
+              "description": "Give your playing field a professional touch",
+              "price": 34.95
+            },
+            "quantity": 1
+          }
+        ],
+        "itemCount": 3,
+        "cartPrice": 329.45
+      },
+      "shipped": false,
+      "name": "hg",
+      "address": "hh",
+      "city": "tt",
+      "state": "rr",
+      "zip": "ee",
+      "country": "rr",
+      "id": 2
     }
   ]
 }
