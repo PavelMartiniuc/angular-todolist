@@ -31,14 +31,8 @@ export class StoreComponent {
         private router: Router,
         private authService : AuthService
     ) {
-
-        if(!authService.authenticated) {
-            this.router.navigateByUrl("/admin")
-        }
-        else {
-            this.productsPerPage = [];
-            this.FillProducts()
-        }
+        this.productsPerPage = [];
+        this.FillProducts()
     }
   
     public get ProductsPerPage(): Product[] {

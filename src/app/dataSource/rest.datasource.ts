@@ -10,16 +10,20 @@ import { AuthResult } from "../auth/model/auth.result";
 const PROTOCOL = "http";
 const PORT = 3000;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RestDataSource {
   
     public baseUrl: string;
-    private authToken: string;   
 
+    private static authResult : AuthResult;
+    
   constructor(private http: HttpClient) {
     this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
   }
 
+ 
   public getProducts(): Observable<Product[]> {
     return this.sendRequest<Product[]>(RequestVerb.Get, 'products');
   }
@@ -32,17 +36,18 @@ export class RestDataSource {
     let authBody = { name: user, password: pass };
     return this.sendRequest<AuthResult>(RequestVerb.Post, 'login', authBody)
         .pipe(map(authResult => {
-            this.authToken = authResult.token;
-            return authResult.success
+            
+          RestDataSource.authResult = authResult;
+            return authResult.success;
         }));
   }
 
   public get authenticated(): boolean {
-    return this.authToken != null;
+    return RestDataSource.authResult && RestDataSource.authResult.success && RestDataSource.authResult.token != null;
   }
 
   public clearAuth(): void  {
-    return this.authToken = null;
+    RestDataSource.authResult = null;
   }
 
   private sendRequest<T>(
@@ -66,9 +71,9 @@ export class RestDataSource {
   }
 
   private getAuthHeader() : HttpHeaders {
-    if (this.authToken)
+    if (this.authenticated)
     {
-        let header = new HttpHeaders({ "Authorization" : `Bearer<${this.authToken}>` });
+        let header = new HttpHeaders({ "Authorization" : `Bearer<${RestDataSource.authResult.token}>` });
         return header;
     }
     
