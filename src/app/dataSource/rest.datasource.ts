@@ -11,19 +11,17 @@ const PROTOCOL = "http";
 const PORT = 3000;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RestDataSource {
-  
-    public baseUrl: string;
+  public baseUrl: string;
 
-    private static authResult : AuthResult;
-    
+  private static authResult: AuthResult;
+
   constructor(private http: HttpClient) {
     this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
   }
 
- 
   public getProducts(): Observable<Product[]> {
     return this.sendRequest<Product[]>(RequestVerb.Get, 'products');
   }
@@ -32,21 +30,53 @@ export class RestDataSource {
     return this.sendRequest(RequestVerb.Post, 'orders', order);
   }
 
+  public saveProduct(product: Product): Observable<Product> {
+    return this.sendRequest(RequestVerb.Post, 'products', product);
+  }
+  
+  public updateProduct(product: Product): Observable<Product> {
+    return this.sendRequest(RequestVerb.Put, `products/${product.id}`, product);
+  }
+  
+  public deleteProduct(id: number): Observable<Product> {
+    return this.sendRequest(RequestVerb.Delete, `products/${id}`);
+  }
+  
+  public getOrders(): Observable<Order[]> {
+    return this.sendRequest<Order[]>(RequestVerb.Get, 'orders');
+  }
+   
+  public deleteOrder(id: number): Observable<Order> {
+    return this.sendRequest(RequestVerb.Delete, `orders/${id}`);
+  }
+
+  public updateOrder(order: Order): Observable<Order> {
+    return this.sendRequest(RequestVerb.Put, `orders/${order.id}`, order);
+  }
+
   public authenticate(user: string, pass: string): Observable<boolean> {
     let authBody = { name: user, password: pass };
-    return this.sendRequest<AuthResult>(RequestVerb.Post, 'login', authBody)
-        .pipe(map(authResult => {
-            
-          RestDataSource.authResult = authResult;
-            return authResult.success;
-        }));
+    return this.sendRequest<AuthResult>(
+      RequestVerb.Post,
+      'login',
+      authBody
+    ).pipe(
+      map((authResult) => {
+        RestDataSource.authResult = authResult;
+        return authResult.success;
+      })
+    );
   }
 
   public get authenticated(): boolean {
-    return RestDataSource.authResult && RestDataSource.authResult.success && RestDataSource.authResult.token != null;
+    return (
+      RestDataSource.authResult &&
+      RestDataSource.authResult.success &&
+      RestDataSource.authResult.token != null
+    );
   }
 
-  public clearAuth(): void  {
+  public clearAuth(): void {
     RestDataSource.authResult = null;
   }
 
@@ -59,10 +89,16 @@ export class RestDataSource {
 
     switch (verb) {
       case RequestVerb.Get: {
-        return this.http.get<T>(_url, { headers: this.getAuthHeader() } );
+        return this.http.get<T>(_url, { headers: this.getAuthHeader() });
       }
       case RequestVerb.Post: {
         return this.http.post<T>(_url, body, { headers: this.getAuthHeader() });
+      }
+      case RequestVerb.Put: {
+        return this.http.put<T>(_url, body, { headers: this.getAuthHeader() });
+      }
+      case RequestVerb.Delete: {
+        return this.http.delete<T>(_url, { headers: this.getAuthHeader() });
       }
       default: {
         return undefined;
@@ -70,13 +106,14 @@ export class RestDataSource {
     }
   }
 
-  private getAuthHeader() : HttpHeaders {
-    if (this.authenticated)
-    {
-        let header = new HttpHeaders({ "Authorization" : `Bearer<${RestDataSource.authResult.token}>` });
-        return header;
+  private getAuthHeader(): HttpHeaders {
+    if (this.authenticated) {
+      let header = new HttpHeaders({
+        Authorization: `Bearer<${RestDataSource.authResult.token}>`,
+      });
+      return header;
     }
-    
+
     return undefined;
   }
 }
