@@ -1,0 +1,21 @@
+{ 
+ "dependencies": { 
+ "bootstrap": "^4.6.2", 
+ "@angular/core": "^17.0.0",
+ "@fortawesome/angular-fontawesome": "^0.14.1",
+ "@fortawesome/fontawesome-svg-core": "^6.5.2",
+ "@fortawesome/free-solid-svg-icons": "^6.5.2"
+ }, 
+ "devDependencies": { 
+ "express": "4.14.0", 
+ "concurrently": "2.2.0", 
+ "json-server": "^0.17.4",
+ "json-server-auth": "^2.1.0",
+ "jsonwebtoken": "^9.0.2"
+ },
+ "scripts": { 
+ "start": "concurrently \"npm run express\" \"npm run json\" ", 
+ "express": "node server.js", 
+ "json": "npx json-server --watch src/app/dataSource/jsonServerData.json -m src/app/auth/authMiddleware.js" 
+ } 
+}
